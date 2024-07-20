@@ -1,4 +1,5 @@
-FROM rocky-8.6-minimal
+FROM rocky-8.6
 
-RUN mkdir -p -m 0700 /root
-RUN mkdir -p -m 0755 /home /srv
+# Set root passwd
+RUN echo 'root:123123' | chpasswd
+
