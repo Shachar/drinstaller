@@ -5,6 +5,8 @@ RUN echo 'root:123123' | chpasswd
 
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked dnf -y install epel-release
 
+RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked dnf -y install util-linux
+
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked \
     dnf -y install \
         alsa-lib apr apr-util dbus-libs fontconfig freetype \
