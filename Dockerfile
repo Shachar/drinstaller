@@ -1,8 +1,5 @@
 FROM rocky-8.6
 
-# Set root passwd
-RUN echo 'root:123123' | chpasswd
-
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked dnf -y install util-linux
 
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked \
@@ -14,8 +11,15 @@ RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked \
         libxkbcommon-x11 libXrandr libXrender libXtst libXxf86vm \
         mesa-libGLU mtdev pulseaudio-libs xcb-util \
         xcb-util-image xcb-util-keysyms xcb-util-renderutil \
-        xcb-util-wm ocl-icd
+        xcb-util-wm ocl-icd usbutils
 
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked dnf -y install epel-release
 
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked dnf -y install xcb-util-cursor
+
+ADD --chown=0:0 --chmod=644 tools/build/pkexec /usr/bin
+ADD --chown=0:0 --chmod=755 tools/proxy-cmd /opt/drinstaller/
+RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/xdg-icon-resource 
+RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/xdg-mime
+RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/gtk-update-icon-cache
+RUN ln -s /opt/drinstaller/proxy-cmd /usr/sbin/udevadm

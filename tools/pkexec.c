@@ -2,8 +2,10 @@
 #include <grp.h>
 #include <sys/fsuid.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 
@@ -18,7 +20,12 @@ int main(int argc, char *argv[], char *env[]) {
         fprintf(log, " \"%s\"", argv[i]);
     }
 
-    fprintf(log, "\n");
+    struct stat st;
+    if( stat( argv[argc-1], &st )==-1 ) {
+        fprintf(log, " couldn't stat: %s\n", strerror(errno));
+    } else {
+        fprintf(log, ": %ld\n", st.st_size);
+    }
     fflush(log);
 
     pid_t child = fork();
@@ -30,6 +37,10 @@ int main(int argc, char *argv[], char *env[]) {
 
     if( child==0 ) {
         // Child
+        char uid_buffer[20];
+        snprintf(uid_buffer, 20, "%d", getuid());
+        setenv("PKEXEC_UID", uid_buffer, 1);
+
         gid_t group[1] = {0};
         setuid(0);
         setgid(0);
