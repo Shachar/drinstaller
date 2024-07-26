@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked dnf -y install epel-
 
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked dnf -y install xcb-util-cursor
 
-ADD --chown=0:0 --chmod=644 tools/build/pkexec /usr/bin
+ADD --chown=0:0 --chmod=644 pkexec /usr/bin
 RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/xdg-icon-resource 
 RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/xdg-mime
 RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/gtk-update-icon-cache
