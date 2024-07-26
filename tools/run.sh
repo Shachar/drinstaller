@@ -3,7 +3,16 @@
 UID=`id -u`
 GID=`id -g`
 INSTALLER="`realpath "$1"`"
-docker run --mount type=bind,source=/dev,destination=/dev --mount type=bind,source=/tmp,destination=/tmp,readonly=false --mount type=bind,source=/home,destination=/home --mount type=bind,source=/opt,destination=/opt --mount type=bind,source=/usr/share/applications,destination=/usr/share/applications --mount type=bind,source=/usr/share/desktop-directories,destination=/usr/share/desktop-directories --mount type=bind,source=/var/BlackmagicDesign,destination=/var/BlackmagicDesign --mount type=bind,source=/usr/lib/udev/rules.d,destination=/usr/lib/udev/rules.d -u $UID:$GID -e HOME="$HOME" -e DISPLAY="$DISPLAY" -it -w /tmp drrocky "$INSTALLER" --appimage-extract-and-run
+VOLUMES=/dev:/tmp:/home:/opt:/usr/share/applications:/usr/share/desktop-directories:/etc/xdg:/var/BlackmagicDesign:/usr/lib/udev/rules.d
+
+MOUNTS=''
+for volume in `echo "$VOLUMES" | tr ':' ' '`
+do
+    MOUNTS="$MOUNTS --mount type=bind,source=$volume,destination=$volume"
+done
+docker run $MOUNTS -u $UID:$GID -e HOME="$HOME" -e DISPLAY="$DISPLAY" -it -w /tmp drrocky "$@"
+
+#"$INSTALLER" --appimage-extract-and-run
 
 
 # directories with changes:
