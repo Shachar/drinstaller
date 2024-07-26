@@ -2,15 +2,14 @@
 
 UID=`id -u`
 GID=`id -g`
-INSTALLER="`realpath "$1"`"
-VOLUMES=/dev:/tmp:/home:/opt:/usr/share/applications:/usr/share/desktop-directories:/etc/xdg:/var/BlackmagicDesign:/usr/lib/udev/rules.d
+BTVOLUMES=/dev:/tmp:/home:/opt:/usr/share/applications:/usr/share/desktop-directories:/etc/xdg:/var/BlackmagicDesign:/usr/lib/udev/rules.d
 
 MOUNTS=''
-for volume in `echo "$VOLUMES" | tr ':' ' '`
+for volume in `echo "$VOLUMES" "$BTVOLUMES" | tr ':' ' '`
 do
     MOUNTS="$MOUNTS --mount type=bind,source=$volume,destination=$volume"
 done
-docker run $MOUNTS -u $UID:$GID -e HOME="$HOME" -e DISPLAY="$DISPLAY" -it -w /tmp drrocky "$@"
+docker run $MOUNTS --mount type=bind,source=/opt/drinstaller/lib64/lib,destination=/usr/lib64/lib -u $UID:$GID -e HOME="$HOME" -e DISPLAY="$DISPLAY" -it -w "`pwd`" ghcr.io/shachar/davinciresolve-rocky:latest "$@"
 
 #"$INSTALLER" --appimage-extract-and-run
 

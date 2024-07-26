@@ -1,0 +1,22 @@
+Source: drinstaller
+Section: video
+Priority: optional
+Maintainer: Shachar Shemesh <shachar@debian.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.1
+Homepage: 
+Rules-Requires-Root: no
+Vcs-Git: https://githube.com/shachar/drinstaller
+
+Package: drinstaller
+Architecture: amd64
+Multi-Arch: foreign
+Depends: docker.io ${misc:Depends}, ${shlibs:Depends}
+Description: Wrapper to the DaVinci Resolve installer
+ This package provides a wrapper to the DaVinci Resolve installer. It allows
+ using the standard installer, as provided by Black Magic Design, to run on
+ Debian and related distribution.
+ .
+ This package encapsulates the installer in a supported distribution
+ (Rocky Linux 8.6) inside a docker image, so that DaVinci Resolve runs from
+ the docker inside your usual system.

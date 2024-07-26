@@ -22,6 +22,8 @@ RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/xdg-icon-resource
 RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/xdg-mime
 RUN ln -s /opt/drinstaller/proxy-cmd /usr/bin/gtk-update-icon-cache
 RUN ln -s /opt/drinstaller/proxy-cmd /usr/sbin/udevadm
+RUN ln -s /opt/drinstaller/lib64/libDaVinciPanelAPI.so /usr/lib64/libDaVinciPanelAPI.so
+RUN ln -s /opt/drinstaller/lib64/libFairlightPanelAPI.so /usr/lib64/libFairlightPanelAPI
 
 RUN mkdir /usr/lib64/lib
 RUN mkdir /var/BlackmagicDesign

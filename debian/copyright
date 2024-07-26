@@ -1,0 +1,35 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: drinstaller
+Upstream-Contact: Shachar Shemesh <shachar@shemesh.biz>
+Source: https://github.com/shachar/drinstaller
+#
+# Please double check copyright with the licensecheck(1) command.
+
+Files:     .gitignore
+           .run.swp
+           .setup.sh.swp
+           README.md
+           docker/.Dockerfile.swp
+           docker/.gitignore
+           docker/.token
+           docker/Dockerfile
+           docker/Makefile
+           docker/pkexec
+           docker/pkexec.c
+           logs/install.log
+           run
+           setup.sh
+           tools/Makefile.am
+           tools/proxy-cmd
+Copyright: __NO_COPYRIGHT_NOR_LICENSE__
+License:   __NO_COPYRIGHT_NOR_LICENSE__
+
+#----------------------------------------------------------------------------
+# huge files   (skipped):
+#         Rocky-8-Container-x86_64-Minimal.tar.xz
+#         logs/filelist.a
+#         logs/filelist.b
+
+#----------------------------------------------------------------------------
+# Files marked as NO_LICENSE_TEXT_FOUND may be covered by the following
+# license/copyright files.
