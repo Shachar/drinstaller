@@ -1,8 +1,0 @@
-#!/bin/bash -e
-
-echo -n "$UID \"$0\"" >> /tmp/delayed_run
-for p in "$@"
-do
-    echo -n " \"$p\"" >>/tmp/delayed_run
-done
-echo >>/tmp/delayed_run

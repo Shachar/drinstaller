@@ -1,9 +1,0 @@
-#!/bin/sh -e
-
-export DISPLAY="$1"
-shift
-
-INSTALLER_PATH="$1"
-shift
-
-"$INSTALLER_PATH" --appimage-extract-and-run "$@"
