@@ -11,7 +11,7 @@ RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked \
         libxkbcommon-x11 libXrandr libXrender libXtst libXxf86vm \
         mesa-libGLU mtdev pulseaudio-libs xcb-util \
         xcb-util-image xcb-util-keysyms xcb-util-renderutil \
-        xcb-util-wm ocl-icd usbutils
+        xcb-util-wm ocl-icd usbutils libXt
 
 RUN --mount=type=cache,target=/var/cache/dnf,sharing=locked dnf -y install epel-release
 
@@ -27,3 +27,5 @@ RUN ln -s /opt/drinstaller/lib64/libFairlightPanelAPI.so /usr/lib64/libFairlight
 
 RUN mkdir /usr/lib64/lib
 RUN mkdir /var/BlackmagicDesign
+
+ENV NVIDIA_DRIVER_CAPABILITIES=all

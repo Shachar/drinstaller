@@ -9,4 +9,11 @@ for volume in `echo "$VOLUMES" "$BTVOLUMES" | tr ':' ' '`
 do
     MOUNTS="$MOUNTS --mount type=bind,source=$volume,destination=$volume"
 done
-docker run $MOUNTS --mount type=bind,source=/opt/drinstaller/lib64/lib,destination=/usr/lib64/lib -u $UID:$GID -e HOME="$HOME" -e DISPLAY="$DISPLAY" -w "`pwd`" ghcr.io/shachar/davinciresolve-rocky:latest "$@"
+
+GROUPS=''
+for group in `id -G`
+do
+    GROUPS="$GROUPS --group-add=$group"
+done
+
+docker run --runtime=nvidia --gpus all $MOUNTS --mount type=bind,source=/opt/drinstaller/lib64/lib,destination=/usr/lib64/lib -u $UID:$GID $GROUPS -e HOME="$HOME" -e DISPLAY="$DISPLAY" -w "`pwd`" ghcr.io/shachar/davinciresolve-rocky:latest "$@"
