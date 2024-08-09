@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+CACHEDIR=/var/cache/drinstaller
+IMAGENAME=drrocky
+
+NVVER=`nvidia-smi  | sed -ne '/Driver Version: /{s/.*Driver Version: \([0-9.]\+\)\s.*/\1/; p}'`
+
+NVFILE="NVIDIA-Linux-x86_64-$NVVER.run"
+
+mkdir -p "$CACHEDIR"
+
+if [ ! -f "$NVFILE" ]
+then
+    cd "$CACHEDIR"
+    wget "https://us.download.nvidia.com/XFree86/Linux-x86_64/$VER/$NVFILE"
+fi
+
+cp "$CACHEDIR/$NVFILE" /tmp/
+cd /tmp/
+distrorun $IMAGENAME ./$NVFILE --no-kernel-modules
+
+rm -f $NVFILE

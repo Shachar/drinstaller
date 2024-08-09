@@ -1,0 +1,15 @@
+#!/bin/bash
+
+"$@"
+RET=$?
+if [ "$RET" -ne 0 ]
+then
+    echo
+    echo "Command failed with error code $RET" >&2
+else
+    echo
+    echo "Finished successfully"
+fi
+
+echo "Press ENTER to close terminal"
+read a

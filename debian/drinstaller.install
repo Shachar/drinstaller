@@ -1,8 +1,5 @@
-rockyrun /opt/drinstaller/
-proxy-cmd /opt/drinstaller/
-DV_Resolve.png /opt/drinstaller/
-install_wrapper /opt/drinstaller/
-scripts/actual_wrapper /opt/drinstaller/scripts/
-scripts/unprivileged_wrapper /opt/drinstaller/scripts/
-com.blackmagicdesign.resolve.directory /usr/share/desktop-directories/
-biz.shemesh.drinstaller.desktop /usr/share/applications/
+Rocky-8-Container-x86_64-Base.tar.xz /opt/drinstaller/
+scripts/* /opt/drinstaller/
+icons/*.png /opt/drinstaller/icons/
+applinks/* /usr/share/applications/
+distrorun.d/* /etc/distrorun.d/

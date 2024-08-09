@@ -1,0 +1,13 @@
+[Desktop Entry]
+Comment=
+Exec=/usr/bin/pkexec /opt/drinstaller/term-wrapper /opt/drinstaller/setup
+GenericName=Set up Rocky Linux for running Davinci Resolve
+Icon=/opt/drinstaller/icons/InstallRocky.png
+Name=Davinci Resolve Installer - Rocky Linux
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+Categories=AudioVideo;AudioVideoEditing;

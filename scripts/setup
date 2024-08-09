@@ -1,7 +1,18 @@
 #!/bin/sh -e
-mkdir /srv/distros/rocky-8
-cd /srv/distros/rocky-8
-tar xvf ~shachar/sources/drinstaller-1.00/docker/Rocky-8-Container-x86_64-Base.tar.xz
+
+INSTDIR=/srv/distros/drrocky
+RUNDIR=/opt/drinstaller
+
+if [ -d "$INSTDIR" -a "$1" != "force" ]
+then
+    echo "$INSTDIR directory already exists. Either delete it or pass \"force\" as first argument" >&2
+
+    exit 1
+fi
+
+mkdir -p "$INSTDIR"
+cd "$INSTDIR"
+tar xvf "$RUNDIR/Rocky-8-Container-x86_64-Base.tar.xz"
 
 # DNS resolver
 cp /etc/resolv.conf etc/
@@ -10,21 +21,11 @@ cp /etc/resolv.conf etc/
 sed -ne '/[^:]*:1[0-9]\{3\}:/p' /etc/passwd >> etc/passwd
 sed -ne '/[^:]*:1[0-9]\{3\}:/p' /etc/group >> etc/group
 
-echo rocky-8 > etc/debian_chroot
-
-cat >/etc/distrorun.d/rocky-8.conf <<EOF
-dir: "/srv/distros/rocky-8"
-mapped_volumes: [
-    "/dev",
-    "/home",
-    "/run",
-    "/tmp"
-]
-EOF
+echo drrocky > etc/debian_chroot
 
 cd /
 
-distrorun rocky-8 dnf install -y \
+distrorun drrocky dnf install -y \
         alsa-lib apr apr-util dbus-libs fontconfig freetype \
         libglvnd libglvnd-egl libglvnd-glx libglvnd-opengl libgomp \
         libICE librsvg2 libSM libX11 libXau libxcb libXcursor \
@@ -36,26 +37,16 @@ distrorun rocky-8 dnf install -y \
         python39 polkit glibc-langpack-en libpng12 procps-ng \
         nss libxkbfile
 
-distrorun rocky-8 dnf install -y epel-release
-distrorun rocky-8 dnf install -y xcb-util-cursor
+distrorun drrocky dnf install -y epel-release
+distrorun drrocky dnf install -y xcb-util-cursor
 
 # Install all locales needed by the current shell
 LOCALS="`locale | sed -e '{ s:.*="\(..\).*:\1: ; s:.*=\(..\).*:\1: ; s:LC_.*:: }' | sort -u | grep -v '^$'`"
 for locale in $LOCALS
 do
-    distrorun rocky-8 dnf install -y glibc-langpack-$locale
+    distrorun drrocky dnf install -y glibc-langpack-$locale
 done
 
 # For installing the nvidia drivers
-distrorun rocky-8 dnf install -y kmod util-linux fuse fuse-libs vulkan-loader pkgconfig libglvnd
+distrorun drrocky dnf install -y kmod util-linux fuse fuse-libs vulkan-loader pkgconfig libglvnd
 
-# distrorun rocky-8 .../NVIDIA-Linux-x86_64-....run --no-kernel-modules
-# driver version from dpkg: dpkg -l nvidia-driver\* | grep 'nvidia-driver-[0-9]\+' | tr -s ' ' | cut -d ' ' -f 3 | sed -e 's:\([0-9.]\+\).*:\1:'
-# https://www.nvidia.com/download/driverResults.aspx/226768/en-us
-# https://www.nvidia.com/content/DriverDownloads/confirmation.php?url=/XFree86/Linux-x86_64/550.90.07/NVIDIA-Linux-x86_64-550.90.07.run&lang=us&type=geforcem
-# https://us.download.nvidia.com/XFree86/Linux-x86_64/550.90.07/NVIDIA-Linux-x86_64-550.90.07.run
-#
-# VER=`dpkg -l nvidia-driver\* | grep 'nvidia-driver-[0-9]\+' | tr -s ' ' | cut -d ' ' -f 3 | sed -e 's:\([0-9.]\+\).*:\1:'`
-# wget https://us.download.nvidia.com/XFree86/Linux-x86_64/$VER/NVIDIA-Linux-x86_64-$VER.run
-#
-# VER=`nvidia-smi  | sed -ne '/Driver Version: /{s/.*Driver Version: \([0-9.]\+\)\s.*/\1/; p}'`
