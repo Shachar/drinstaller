@@ -1,0 +1,13 @@
+[Desktop Entry]
+Comment=
+Exec=/usr/bin/pkexec /opt/drinstaller/term-wrapper /opt/drinstaller/nvidia-sync
+GenericName=Sync the NVidia drivers inside the Rocky Linux container
+Icon=/opt/drinstaller/icons/InstallNVidia.png
+Name=Davinci Resolve Installer - NVidia driver
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=true
+TerminalOptions=
+Type=Application
+Categories=AudioVideo;AudioVideoEditing;

@@ -9,12 +9,15 @@ NVFILE="NVIDIA-Linux-x86_64-$NVVER.run"
 
 mkdir -p "$CACHEDIR"
 
-if [ ! -f "$NVFILE" ]
+if [ ! -x "$CACHEDIR/$NVFILE" ]
 then
     cd "$CACHEDIR"
-    wget "https://us.download.nvidia.com/XFree86/Linux-x86_64/$VER/$NVFILE"
+    rm -f "$NVFILE"
+    wget "https://us.download.nvidia.com/XFree86/Linux-x86_64/$NVVER/$NVFILE"
+    chmod +x "$NVFILE"
 fi
 
+rm -f "/tmp/$NVFILE"
 cp "$CACHEDIR/$NVFILE" /tmp/
 cd /tmp/
 distrorun $IMAGENAME ./$NVFILE --no-kernel-modules
