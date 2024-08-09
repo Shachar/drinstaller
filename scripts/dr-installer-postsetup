@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+APPSDIR=/usr/share/applications/
+DISTRODIR=/srv/distros/drrocky
+
+convert_icon()
+{
+    sed -e "s:^Exec=/opt/resolve:Exec=distrorun drrocky /opt/resolve:" "$1" > "$2"
+}
+
+rm -f $APPSDIR/com.blackmagicdesign.resolve* $APPSDIR/com.blackmagicdesign.rawplayer.desktop $APPSDIR/com.blackmagicdesign.rawspeedtest.desktop
+
+cd $DISTRODIR/$APPSDIR
+for desktop in com.blackmagicdesign.*.desktop
+do
+    convert_icon "$desktop" "$APPSDIR/$desktop"
+done

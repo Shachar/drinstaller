@@ -1,5 +1,7 @@
 Rocky-8-Container-x86_64-Base.tar.xz /opt/drinstaller/
 scripts/* /opt/drinstaller/
 icons/*.png /opt/drinstaller/icons/
-applinks/* /usr/share/applications/
+applinks/*.desktop /usr/share/applications/
+applinks/*.menu /etc/xdg/menus/applications-merged/
+applinks/*.directory /usr/share/desktop-directories/
 distrorun.d/* /etc/distrorun.d/

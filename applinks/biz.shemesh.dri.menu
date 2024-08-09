@@ -1,0 +1,26 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+	"http://www.freedesktop.org/standards/menu-spec/menu-1.0.dtd">
+<Menu>
+	<Name>Applications</Name>
+	<Menu>
+		<Name>DaVinci Resolve</Name>
+		<Directory>com.blackmagicdesign.resolve.directory</Directory>
+		<Include>
+			<Filename>com.blackmagicdesign.resolve.desktop</Filename>
+			<Filename>com.blackmagicdesign.resolve-Installer.desktop</Filename>
+			<Filename>com.blackmagicdesign.resolve-CaptureLogs.desktop</Filename>
+			<Filename>com.blackmagicdesign.resolve-Panels.desktop</Filename>
+			<Filename>com.blackmagicdesign.rawplayer.desktop</Filename>
+			<Filename>com.blackmagicdesign.rawspeedtest.desktop</Filename>
+		</Include>
+		<Menu>
+			<Name>DaVinci Resolve Installer</Name>
+			<Directory>biz.shemesh.dri.directory</Directory>
+			<Include>
+				<Filename>biz.shemesh.dri.rockysetup.desktop</Filename>
+				<Filename>biz.shemesh.dri.nvidiasetup.desktop</Filename>
+				<Filename>biz.shemesh.dri.davincisetup.desktop</Filename>
+			</Include>
+		</Menu>
+	</Menu>
+</Menu>

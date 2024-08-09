@@ -9,3 +9,5 @@ fi
 
 echo distrorun --extra-volume=/usr/lib/udev/rules.d drrocky $INSTALLER
 distrorun --extra-volume=/usr/lib/udev/rules.d drrocky $INSTALLER
+
+pkexec /opt/drinstaller/dr-installer-postsetup
