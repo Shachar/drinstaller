@@ -1,0 +1,6 @@
+.debhelper/
+debhelper-build-stamp
+drinstaller.substvars
+drinstaller/
+files
+tests/

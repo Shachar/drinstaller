@@ -41,11 +41,14 @@ distrorun drrocky dnf install -y epel-release
 distrorun drrocky dnf install -y xcb-util-cursor
 
 # Install all locales needed by the current shell
-LOCALS="`locale | sed -e '{ s:.*="\(..\).*:\1: ; s:.*=\(..\).*:\1: ; s:LC_.*:: }' | sort -u | grep -v '^$'`"
-for locale in $LOCALS
-do
-    distrorun drrocky dnf install -y glibc-langpack-$locale
-done
+LOCALS="`locale | sed -ne '/^L.*=../{ s:.*="\(..\).*:\1: ; s:.*=\(..\).*:\1: ; s:LC_.*:: ; p }' | sort -u | grep -v '^$'`"
+if [ -n "$LOCALS" ]
+then
+    for locale in $LOCALS
+    do
+        distrorun drrocky dnf install -y glibc-langpack-$locale
+    done
+fi
 
 # For installing the nvidia drivers
 distrorun drrocky dnf install -y kmod util-linux fuse fuse-libs vulkan-loader pkgconfig libglvnd

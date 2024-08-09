@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+INSTALLER="$1"
+if [ -z "$1" ]
+then
+    echo "Please provide path to DaVinci Resolve installer"
+    read INSTALLER restofline
+fi
+
+echo distrorun --extra-volume=/usr/lib/udev/rules.d drrocky $INSTALLER
+distrorun --extra-volume=/usr/lib/udev/rules.d drrocky $INSTALLER
