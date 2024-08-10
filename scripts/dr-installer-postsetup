@@ -15,3 +15,7 @@ for desktop in com.blackmagicdesign.*.desktop
 do
     convert_icon "$desktop" "$APPSDIR/$desktop"
 done
+
+echo "Refreshing udev rules"
+udevadm control --reload-rules
+udevadm trigger

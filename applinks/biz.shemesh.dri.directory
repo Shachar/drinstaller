@@ -1,6 +1,5 @@
 [Desktop Entry]
 Version=1.0
 Type=Directory
-Name=DaVinci Resolve
-Name[en_US]=DaVinci Resolve
+Name=Installer
 Icon=/opt/drinstaller/icons/drinstaller.png

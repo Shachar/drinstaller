@@ -11,3 +11,8 @@ echo distrorun --extra-volume=/usr/lib/udev/rules.d drrocky $INSTALLER
 distrorun --extra-volume=/usr/lib/udev/rules.d drrocky $INSTALLER
 
 pkexec /opt/drinstaller/dr-installer-postsetup
+
+for desktop in "$HOME/Desktop/com.blackmagicdesign.*.desktop"
+do
+    sed -i -e "s:^Exec=/opt/resolve:Exec=distrorun drrocky /opt/resolve:" "$desktop"
+done
