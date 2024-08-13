@@ -5,3 +5,5 @@ applinks/*.desktop /usr/share/applications/
 applinks/*.menu /etc/xdg/menus/applications-merged/
 applinks/*.directory /usr/share/desktop-directories/
 distrorun.d/* /etc/distrorun.d/
+apt/*.list /etc/apt/sources.list.d/
+apt/*.gpg /usr/share/keyrings/
