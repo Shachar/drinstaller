@@ -35,7 +35,7 @@ distrorun drrocky dnf install -y \
         xcb-util-image xcb-util-keysyms xcb-util-renderutil \
         xcb-util-wm ocl-icd usbutils libXt \
         python39 polkit glibc-langpack-en libpng12 procps-ng \
-        nss libxkbfile
+        nss libxkbfile alsa-plugins-pulseaudio alsa-ucm
 
 distrorun drrocky dnf install -y epel-release
 distrorun drrocky dnf install -y xcb-util-cursor
