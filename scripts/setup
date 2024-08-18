@@ -13,6 +13,7 @@ fi
 mkdir -p "$INSTDIR"
 cd "$INSTDIR"
 tar xvf "$RUNDIR/Rocky-8-Container-x86_64-Base.tar.xz"
+mkdir -p usr/share/fonts
 
 # DNS resolver
 cp /etc/resolv.conf etc/
