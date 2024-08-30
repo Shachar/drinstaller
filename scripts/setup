@@ -54,3 +54,5 @@ fi
 # For installing the nvidia drivers
 distrorun drrocky dnf install -y kmod util-linux fuse fuse-libs vulkan-loader pkgconfig libglvnd
 
+# Mark the rocky image version
+echo 1 > $INSTDIR/etc/drinstaller.ver
