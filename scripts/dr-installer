@@ -4,11 +4,14 @@ INSTALLER="$1"
 if [ -z "$1" ]
 then
     echo "Please provide path to DaVinci Resolve installer"
-    read INSTALLER restofline
+    read INSTALLER
 fi
 
-echo distrorun --extra-volume=/usr/lib/udev/rules.d drrocky $INSTALLER
-distrorun --extra-volume=/usr/lib/udev/rules.d drrocky $INSTALLER
+# INSTALLER is sometimes needlessly quoted
+SANITIZED="`echo "$INSTALLER" | sed -e '{ s/^"\(.*\)"$/\1/ ; s/^'\''\(.*\)'\''$/\1/ }'`"
+
+echo distrorun --extra-volume=/usr/lib/udev/rules.d drrocky "$SANITIZED"
+distrorun --extra-volume=/usr/lib/udev/rules.d drrocky "$SANITIZED"
 
 echo
 echo "Post BlackMagic setup adjustments"
