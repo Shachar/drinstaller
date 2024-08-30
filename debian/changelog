@@ -1,3 +1,10 @@
+drinstaller (1.01) stable; urgency=medium
+
+  * Mark dr image with image version
+  * Allow quotes in DR installer's path
+
+ -- Shachar Shemesh <shachar@debian.org>  Fri, 30 Aug 2024 20:00:13 +0200
+
 drinstaller (1.00) stable; urgency=low
 
   * Initial release.
